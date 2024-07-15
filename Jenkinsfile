@@ -40,17 +40,6 @@ pipeline {
  
         }
 
-        stage('Static Code Analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv('SonarQube') {
-                        sh 'mvn clean verify sonar:sonar'
-                    }
-                }
-            }
-        }
-    
-
         stage('static code analysis'){
 
             steps{
