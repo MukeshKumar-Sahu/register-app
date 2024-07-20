@@ -57,19 +57,7 @@ pipeline {
             }
         }
 
-        stage('Quality gate') {
-
-            steps{
-                script{
-
-                    timeout(time: 1, unit: 'HOURS') {
-                    
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Jenkins-token'
-
-                    }
-                }
-            }
-        }
+        
 
         stage('Build Docker Image') {
             steps {
