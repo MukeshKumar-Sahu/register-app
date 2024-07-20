@@ -28,7 +28,7 @@ pipeline {
             }
         }
 
-        stage('Biuld'){
+        stage('Build'){
 
             steps{
 
@@ -61,7 +61,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker_image = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
+                    DOCKER_IMAGE = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
                 }
             }
         }
