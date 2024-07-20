@@ -62,11 +62,11 @@ pipeline {
             steps {
                 script {
 
-                    docker.withRegistry('',DOCKER_CREDENTIALS_ID) {
+                    docker.withRegistry('https://hub.docker.com/',DOCKER_CREDENTIALS_ID) {
                         dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
                     }
 
-                    docker.withRegistry('',DOCKER_CREDENTIALS_ID) {
+                    docker.withRegistry('https://hub.docker.com/',DOCKER_CREDENTIALS_ID) {
 
                         docker_image.push()
                         docker_image.push('latest')
