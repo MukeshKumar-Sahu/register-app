@@ -9,7 +9,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE = 'My Frist APP'
+        DOCKER_IMAGE = 'My First APP'
         DOCKER_CREDENTIALS_ID = 'DockerID'
     }
 
