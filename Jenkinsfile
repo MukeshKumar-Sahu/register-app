@@ -58,29 +58,21 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build Docker Image and Push Docker Image') {
             steps {
                 script {
 
                     docker.withRegistry('',DOCKER_CREDENTIALS_ID) {
-                    docker_image = docker.build "(DOCKER_IMAGE)"
+                        docker_image = docker.build "$(DOCKER_IMAGE)"
                     }
-                }
-            }
-        }
 
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
+                    docker.withRegistry('',DOCKER_CREDENTIALS_ID) {
+
                         docker_image.push()
                         docker_image.push('latest')
                     }
                 }
             }
-        }
-
-        
-
+        }    
     }
 }
