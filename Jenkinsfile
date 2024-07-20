@@ -3,54 +3,44 @@ pipeline {
     agent any
 
     tools {
-
         maven 'maven3.9.7'
         jdk 'Java17'
     }
 
     environment {
         DOCKER_USER = 'mukeshkumarsahu'
-        DOCKER_IMAGE = 'My First APP'
+        DOCKER_IMAGE = 'MyFirstAPP'
         DOCKER_CREDENTIALS_ID = 'DockerID'
     }
 
-    stages{
-
-        stage('Cleanup workspace'){
+    stages {
+        stage('Cleanup workspace') {
             steps {
                 cleanWs()
             }
         }
 
-        stage('check out'){
+        stage('Check out') {
             steps {
-              git branch: 'main' , credentialsId: 'Github' , url: 'https://github.com/MukeshKumar-Sahu/register-app'
+                git branch: 'main', credentialsId: 'Github', url: 'https://github.com/MukeshKumar-Sahu/register-app'
             }
         }
 
-        stage('Build'){
-
-            steps{
-
+        stage('Build') {
+            steps {
                 sh "mvn clean package"
             }
         }
 
-        stage('test'){
-
-            steps{
-
+        stage('Test') {
+            steps {
                 sh "mvn test"
             }
-        
- 
         }
 
-        stage('static code analysis'){
-
-            steps{
+        stage('Static Code Analysis') {
+            steps {
                 script {
-
                     withSonarQubeEnv(credentialsId: 'Jenkins-token') {
                         sh "mvn sonar:sonar"
                     }
@@ -61,18 +51,13 @@ pipeline {
         stage('Build Docker Image and Push Docker Image') {
             steps {
                 script {
-
-                    docker.withRegistry('https://hub.docker.com/',DOCKER_CREDENTIALS_ID) {
-                        dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
-                    }
-
-                    docker.withRegistry('https://hub.docker.com/',DOCKER_CREDENTIALS_ID) {
-
-                        docker_image.push()
-                        docker_image.push('latest')
+                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
+                        def dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
+                        dockerImage.push()
+                        dockerImage.push('latest')
                     }
                 }
             }
-        }    
+        }
     }
 }
