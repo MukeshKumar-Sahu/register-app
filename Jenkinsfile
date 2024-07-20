@@ -63,7 +63,7 @@ pipeline {
                 script {
 
                     docker.withRegistry('',DOCKER_CREDENTIALS_ID) {
-                    docker_image = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
+                    docker_image = docker.build "$(DOCKER_IMAGE)"
                     }
                 }
             }
