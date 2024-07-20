@@ -61,8 +61,12 @@ pipeline {
 
             steps{
                 script{
+
+                    timeout(time: 1, unit: 'HOURS') {
                     
                     waitForQualityGate abortPipeline: false, credentialsId: 'Jenkins-token'
+
+                    }
                 }
             }
         }
@@ -74,7 +78,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Push Docker Image') {
             steps {
                 script {
