@@ -9,6 +9,7 @@ pipeline {
     }
 
     environment {
+        DOCKER_USER = 'mukeshkumarsahu'
         DOCKER_IMAGE = 'My First APP'
         DOCKER_CREDENTIALS_ID = 'DockerID'
     }
@@ -57,12 +58,10 @@ pipeline {
             }
         }
 
-        
-
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
+                    docker_image = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
                 }
             }
         }
