@@ -8,6 +8,11 @@ pipeline {
         jdk 'Java17'
     }
 
+    environment {
+        DOCKER_IMAGE = 'My Frist APP'
+        DOCKER_CREDENTIALS_ID = 'DockerID'
+    }
+
     stages{
 
         stage('Cleanup workspace'){
@@ -58,6 +63,25 @@ pipeline {
                 script{
                     
                     waitForQualityGate abortPipeline: false, credentialsId: 'Jenkins-token'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
+                }
+            }
+        }
+        
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
+                        dockerImage.push()
+                        dockerImage.push('latest')
+                    }
                 }
             }
         }
