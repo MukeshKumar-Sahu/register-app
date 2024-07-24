@@ -10,7 +10,7 @@ pipeline {
     environment {
         DOCKER_USER = 'mukeshkumarsahu'
         DOCKER_IMAGE = 'MyFirstAPP'
-        DOCKER_CREDENTIALS_ID = 'DockerID'
+        DOCKER_CREDENTIALS_ID = 'Docker-Jenkins'
     }
 
     stages {
