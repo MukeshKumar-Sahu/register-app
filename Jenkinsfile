@@ -51,7 +51,7 @@ pipeline {
         stage('Build Docker Image and Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', DOCKER_CREDENTIALS_ID) {
+                    docker.withDockerRegistry([credentialsId:'Docker-Jenkins', url: 'https://registry.hub.docker.com']) {
                         def dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
                         dockerImage.push()
                         dockerImage.push('latest')
