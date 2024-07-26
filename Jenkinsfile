@@ -48,16 +48,17 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image and Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'Docker-Jenkins') {
-                        def dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
-                        dockerImage.push()
-                        dockerImage.push('latest')
-                    }
+
+        stage('Build and Push') {
+            agent {
+                docker {
+                    image 'docker:20.10'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock'
                 }
             }
+            steps {
+                sh 'docker build -t my-image .'
+                sh 'docker push my-image'
+            }
         }
-    }
 }
