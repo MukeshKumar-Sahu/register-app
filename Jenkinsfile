@@ -41,7 +41,7 @@ pipeline {
         stage('Static Code Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv(credentialsId: 'Jenkins-token2') {
+                    withSonarQubeEnv(credentialsId: 'Sonartoken') {
                         sh "mvn sonar:sonar"
                     }
                 }
