@@ -14,30 +14,30 @@ pipeline {
         DOCKER_PASSWORD = 'Khemchand@123'
     }
 
-    stages {
-        stage('Cleanup workspace') {
-            steps {
-                cleanWs()
-            }
-        }
+    //stages {
+    //    stage('Cleanup workspace') {
+    //        steps {
+    //            cleanWs()
+     //       }
+       // }
 
-        stage('Check out') {
-            steps {
-                git branch: 'main', credentialsId: 'Github', url: 'https://github.com/MukeshKumar-Sahu/register-app'
-            }
-        }
+        //stage('Check out') {
+          //  steps {
+            //    git branch: 'main', credentialsId: 'Github', url: 'https://github.com/MukeshKumar-Sahu/register-app'
+            //}
+        //}
 
-        stage('Build') {
-            steps {
-                sh "mvn clean package"
-            }
-        }
+        //stage('Build') {
+          //  steps {
+            //    sh "mvn clean package"
+            //}
+        //}
 
-        stage('Test') {
-            steps {
-                sh "mvn test"
-            }
-        }
+       // stage('Test') {
+         //   steps {
+         //       sh "mvn test"
+         //   }
+      //  }
 
        // stage('Static Code Analysis') {
          //   steps {
