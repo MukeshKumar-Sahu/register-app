@@ -27,6 +27,17 @@ pipeline {
             }
         }
 
+        
+    stage('Run Background Process') {
+        if (isUnix()) {
+            sh 'nohup your-command &'
+        } else {
+            bat 'start /B your-command'
+        }
+    }
+
+
+
         stage('Build') {
             steps {
                 sh "mvn install"
