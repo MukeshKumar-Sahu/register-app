@@ -28,7 +28,7 @@ pipeline {
         }
 
         
-    stage('Run Background Process') {
+       stage('Run Background Process') {
         if (isUnix()) {
             sh 'nohup your-command &'
         } else {
