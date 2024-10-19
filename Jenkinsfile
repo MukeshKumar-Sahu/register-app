@@ -27,27 +27,27 @@ pipeline {
             }
         }
 
-        //stage('Build') {
-          //  steps {
-            //    sh "mvn clean package"
-            //}
-        //}
+        stage('Build') {
+            steps {
+                sh "mvn clean package"
+            }
+        }
 
-       // stage('Test') {
-         //   steps {
-         //       sh "mvn test"
-         //   }
-      //  }
+        stage('Test') {
+           steps {
+                sh "mvn test"
+            }
+        }
 
-       // stage('Static Code Analysis') {
-         //   steps {
-           //     script {
-             //       withSonarQubeEnv(credentialsId: 'Sonartoken') {
-               //         sh "mvn sonar:sonar"
-                 //   }
-             //   }
-           // }
-        //}
+        stage('Static Code Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'Sonartoken') {
+                        sh "mvn sonar:sonar"
+                    }
+                }
+            }
+        }
 
 
         stage('Build and Push') {
