@@ -40,15 +40,15 @@ pipeline {
             }
         }
 
-        stage('Static Code Analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv(credentialsId: 'Sonartoken') {
-                        bat "mvn sonar:sonar"
-                    }
-                }
-            }
-        }
+        //stage('Static Code Analysis') {
+           // steps {
+               // script {
+              //      withSonarQubeEnv(credentialsId: 'Sonartoken') {
+              //          bat "mvn sonar:sonar"
+              //      }
+         //       }
+        //    }
+     //   }
 
 
         stage('Build and Push') {
