@@ -59,8 +59,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker build -t my-image .'
-                sh 'docker push my-image'
+                bat 'docker build -t my-image .'
+                bat 'docker push my-image'
             }
         }
     }
